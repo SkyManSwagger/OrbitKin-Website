@@ -1,0 +1,340 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 97%; /* Light gray background for better contrast */
+    --foreground: 222.2 84% 8%; /* Much darker text for better contrast */
+    --card: 0 0% 100%; /* Pure white cards */
+    --card-foreground: 222.2 84% 8%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 8%;
+    --primary: 254 72% 50%; /* Darker purple for light mode */
+    --primary-foreground: 0 0% 100%;
+    --secondary: 210 40% 90%;
+    --secondary-foreground: 222.2 47.4% 15%;
+    --muted: 210 20% 85%;
+    --muted-foreground: 215.4 16.3% 30%; /* Much darker muted text */
+    --accent: 51 85% 40%; /* Darker gold for light mode */
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 75%; /* Much darker borders for visibility */
+    --input: 214.3 31.8% 75%;
+    --ring: 254 72% 50%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 254 72% 66%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 51 100% 50%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 254 72% 66%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  /* Typography System */
+  h1 {
+    @apply text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight;
+    line-height: 1.1;
+  }
+  
+  h2 {
+    @apply text-3xl md:text-4xl font-bold tracking-tight;
+    line-height: 1.2;
+  }
+  
+  h3 {
+    @apply text-2xl md:text-3xl font-semibold;
+    line-height: 1.3;
+  }
+  
+  h4 {
+    @apply text-xl md:text-2xl font-semibold;
+    line-height: 1.4;
+  }
+  
+  p {
+    @apply leading-relaxed;
+  }
+  
+  /* Focus states */
+  button:focus-visible,
+  a:focus-visible {
+    @apply outline-none ring-2 ring-orbitkin-purple ring-offset-2 ring-offset-background;
+  }
+}
+
+/* Custom animations */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes orbit {
+  from {
+    transform: rotate(0deg) translateX(100px) rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg) translateX(100px) rotate(-360deg);
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-orbit {
+  animation: orbit 20s linear infinite;
+}
+
+/* Gradient text */
+.gradient-text {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-orbitkin-purple to-orbitkin-gold;
+}
+
+/* Light mode specific gradient text */
+.light .gradient-text {
+  @apply bg-gradient-to-r from-purple-600 to-yellow-600;
+}
+
+/* Glow effects */
+.glow-purple {
+  box-shadow: 0 0 30px rgba(124, 94, 255, 0.5);
+}
+
+.glow-gold {
+  box-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+}
+
+/* Light mode glow effects - subtler */
+.light .glow-purple {
+  box-shadow: 0 0 20px rgba(124, 94, 255, 0.3);
+}
+
+.light .glow-gold {
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+}
+
+/* Card styles */
+.card-hover {
+  @apply transition-all duration-300 hover:scale-[1.02] hover:shadow-xl;
+}
+
+/* Light mode card enhancements */
+.light .card-elevated {
+  @apply bg-white shadow-md border border-gray-300;
+}
+
+.light .card-subtle {
+  @apply bg-white shadow-sm border border-gray-200;
+}
+
+.light .card-interactive {
+  @apply bg-white shadow-sm border border-gray-300 hover:shadow-lg hover:border-gray-400;
+}
+
+.card-gradient-border {
+  position: relative;
+  background: linear-gradient(to right, rgba(124, 94, 255, 0.1), rgba(255, 215, 0, 0.1));
+  padding: 1px;
+  border-radius: 0.75rem;
+}
+
+/* Smooth transitions */
+.transition-smooth {
+  @apply transition-all duration-300 ease-out;
+}
+
+/* Section spacing */
+.section-padding {
+  @apply py-16 md:py-24 lg:py-32;
+}
+
+/* Container max width */
+.container-narrow {
+  @apply max-w-4xl mx-auto;
+}
+
+.container-wide {
+  @apply max-w-7xl mx-auto;
+}
+
+/* Cosmic theme elements */
+.cosmic-dots {
+  position: relative;
+  overflow: hidden;
+}
+
+.cosmic-dots::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: radial-gradient(circle at 20% 50%, rgba(124, 94, 255, 0.1) 1px, transparent 1px),
+                    radial-gradient(circle at 80% 20%, rgba(255, 215, 0, 0.1) 1px, transparent 1px),
+                    radial-gradient(circle at 40% 90%, rgba(0, 191, 255, 0.08) 1px, transparent 1px);
+  background-size: 50px 50px, 80px 80px, 60px 60px;
+  animation: float 20s ease-in-out infinite;
+  opacity: 0.3;
+}
+
+/* Light mode specific adjustments */
+.light .cosmic-dots::before {
+  opacity: 0.1;
+}
+
+/* Light mode card defaults */
+.light [class*="bg-card"] {
+  @apply bg-white shadow-sm border-gray-300;
+}
+
+.light [class*="bg-white/5"] {
+  @apply bg-white shadow-sm;
+}
+
+.light [class*="border-white/10"] {
+  @apply border-gray-300;
+}
+
+.light [class*="border-white/20"] {
+  @apply border-gray-400;
+}
+
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+/* Starfield background */
+.starfield {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.star {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  background: white;
+  border-radius: 50%;
+  animation: twinkle 4s infinite;
+}
+
+.star:nth-child(odd) {
+  animation-delay: 2s;
+}
+
+.star:nth-child(3n) {
+  animation-delay: 1s;
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0; }
+  50% { opacity: 1; }
+}
+
+/* Cosmic glow variations */
+.glow-subtle {
+  box-shadow: 0 0 20px rgba(124, 94, 255, 0.1);
+}
+
+.text-cosmic {
+  background: linear-gradient(45deg, #7C5EFF, #FFD700, #00BFFF, #7C5EFF);
+  background-size: 400% 400%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: cosmic-flow 8s ease-in-out infinite;
+}
+
+@keyframes cosmic-flow {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+/* Improved button interactions */
+.btn-cosmic {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #7C5EFF, #FFD700);
+  transition: all 0.3s ease;
+}
+
+.btn-cosmic::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.btn-cosmic:hover::before {
+  left: 100%;
+}
+
+/* Enhanced card styles */
+.card-cosmic {
+  position: relative;
+  background: rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.card-cosmic::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  padding: 1px;
+  background: linear-gradient(45deg, rgba(124, 94, 255, 0.3), rgba(255, 215, 0, 0.3), rgba(0, 191, 255, 0.3));
+  border-radius: inherit;
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: xor;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.card-cosmic:hover::before {
+  opacity: 1;
+}
